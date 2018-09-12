@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMMC.Domain", "CMMC.Domain\CMMC.Domain.csproj", "{ACEF207D-8E06-4913-8048-CB26B9F8F6B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMMC.Data", "CMMC.Data\CMMC.Data.csproj", "{2C51C30F-C2E0-48B0-AA27-C0AB49573365}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infraestrutura", "Infraestrutura", "{113921A5-D881-4CE9-9828-829924AFE608}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMMC.Infraestrutura.Identity", "CMMC.Infraestrutura.Identity\CMMC.Infraestrutura.Identity.csproj", "{010B2E96-339A-42CE-B744-B96398D06EE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMMC.Applications", "CMMC.Applications\CMMC.Applications.csproj", "{DD9FA2BF-68E9-4B73-B0C6-F2AEB8AEFC2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMMC.Infraestrutura.IoC", "CMMC.Infraestrutura.IoC\CMMC.Infraestrutura.IoC.csproj", "{E23DF5ED-BFC5-4E94-9176-7E938EFE3FD8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMMC.UI.Web", "CMMC.UI.Web\CMMC.UI.Web.csproj", "{36F63F29-3D57-4D52-90A5-8B2865446968}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACEF207D-8E06-4913-8048-CB26B9F8F6B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACEF207D-8E06-4913-8048-CB26B9F8F6B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACEF207D-8E06-4913-8048-CB26B9F8F6B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACEF207D-8E06-4913-8048-CB26B9F8F6B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C51C30F-C2E0-48B0-AA27-C0AB49573365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C51C30F-C2E0-48B0-AA27-C0AB49573365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C51C30F-C2E0-48B0-AA27-C0AB49573365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C51C30F-C2E0-48B0-AA27-C0AB49573365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010B2E96-339A-42CE-B744-B96398D06EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010B2E96-339A-42CE-B744-B96398D06EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010B2E96-339A-42CE-B744-B96398D06EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010B2E96-339A-42CE-B744-B96398D06EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD9FA2BF-68E9-4B73-B0C6-F2AEB8AEFC2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD9FA2BF-68E9-4B73-B0C6-F2AEB8AEFC2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD9FA2BF-68E9-4B73-B0C6-F2AEB8AEFC2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD9FA2BF-68E9-4B73-B0C6-F2AEB8AEFC2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E23DF5ED-BFC5-4E94-9176-7E938EFE3FD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23DF5ED-BFC5-4E94-9176-7E938EFE3FD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23DF5ED-BFC5-4E94-9176-7E938EFE3FD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23DF5ED-BFC5-4E94-9176-7E938EFE3FD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36F63F29-3D57-4D52-90A5-8B2865446968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36F63F29-3D57-4D52-90A5-8B2865446968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36F63F29-3D57-4D52-90A5-8B2865446968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36F63F29-3D57-4D52-90A5-8B2865446968}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{010B2E96-339A-42CE-B744-B96398D06EE3} = {113921A5-D881-4CE9-9828-829924AFE608}
+		{E23DF5ED-BFC5-4E94-9176-7E938EFE3FD8} = {113921A5-D881-4CE9-9828-829924AFE608}
+	EndGlobalSection
+EndGlobal
