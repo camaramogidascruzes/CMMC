@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 namespace CMMC.Domain.Interfaces.Repositories.Geral
 {
-    public interface IUsuarioRepository
+    public interface IUsuarioRepository : IRepositoryBase<Usuario>
     {
         Task<Usuario> BuscarPorNome(string username);
         IQueryable<Usuario> BuscarUsuario();

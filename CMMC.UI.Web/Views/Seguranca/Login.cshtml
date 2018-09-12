@@ -1,0 +1,23 @@
+﻿@model CMMC.Domain.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+
+<h6>Entre com Usuário e Senha</h6>
+@using (Html.BeginForm("Login", "Seguranca", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    <div class="form-group">
+        <label for="texto">Usuário</label>
+        @Html.TextBoxFor(m => m.usuario, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="senha">Senha</label>
+        @Html.PasswordFor(m => m.senha, new { @class = "form-control" })
+    </div>
+    @Html.ValidationSummary(true)
+    <div class="action">
+        <button type="submit" class="btn btn-primary signup">Entrar</button>
+    </div>
+
+}
+

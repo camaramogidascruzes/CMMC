@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using CMMC.Data.Context;
 using CMMC.Domain.Entities.Geral;
 using CMMC.Domain.Interfaces.Repositories.Geral;
 
@@ -10,7 +11,7 @@ namespace CMMC.Data.Repositories.Geral
 {
     public class UsuarioRepository : RepositoryBase<Usuario>, IUsuarioRepository
     {
-        public UsuarioRepository(DbContext context) : base(context)
+        public UsuarioRepository(GeralContext context) : base(context)
         {
             if (context == null) throw new ArgumentNullException();
         }

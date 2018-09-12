@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
@@ -52,11 +56,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Bootstrap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CMMC.Data\CMMC.Data.csproj">
+      <Project>{2C51C30F-C2E0-48B0-AA27-C0AB49573365}</Project>
+      <Name>CMMC.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMMC.Domain\CMMC.Domain.csproj">
+      <Project>{ACEF207D-8E06-4913-8048-CB26B9F8F6B4}</Project>
+      <Name>CMMC.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CMMC.Infraestrutura.Identity\CMMC.Infraestrutura.Identity.csproj">
+      <Project>{010B2E96-339A-42CE-B744-B96398D06EE3}</Project>
+      <Name>CMMC.Infraestrutura.Identity</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

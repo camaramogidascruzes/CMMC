@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using CMMC.Data.Context;
 using CMMC.Domain.Entities.Geral;
 using CMMC.Domain.Interfaces.Repositories.Geral;
 
@@ -8,7 +9,7 @@ namespace CMMC.Data.Repositories.Geral
 {
     public class GrupoRepository : RepositoryBase<Grupo>, IGrupoRepository
     {
-        public GrupoRepository(DbContext context) : base(context)
+        public GrupoRepository(GeralContext context) : base(context)
         {
             if (context == null) throw new ArgumentNullException();
         }

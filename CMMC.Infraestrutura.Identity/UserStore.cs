@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CMMC.Domain.Entities.Geral;
+using CMMC.Domain.Interfaces.Repositories.Geral;
 
 namespace CMMC.Infraestrutura.Identity
 {
@@ -19,10 +20,10 @@ namespace CMMC.Infraestrutura.Identity
         IUserTwoFactorStore<IdentityUser, int>
 
     {
-        private readonly UsuarioRepository _usuariorepository;
-        private readonly GrupoRepository _gruporepository;
+        private readonly IUsuarioRepository _usuariorepository;
+        private readonly IGrupoRepository _gruporepository;
 
-        public UserStore(UsuarioRepository usuariorepository, GrupoRepository gruporepository)
+        public UserStore(IUsuarioRepository usuariorepository, IGrupoRepository gruporepository)
         {
             _usuariorepository = usuariorepository;
             _gruporepository = gruporepository;
