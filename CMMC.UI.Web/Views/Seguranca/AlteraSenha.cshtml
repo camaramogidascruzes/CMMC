@@ -1,0 +1,58 @@
+﻿@model CMMC.Domain.ViewModels.AlteraSenhaViewModel
+@{
+    ViewBag.Title = "AlteraSenha";
+}
+<div class="col-md-12">
+    <div class="content-box-header panel-heading">
+        <div class="panel-title">@ViewBag.Title</div>
+    </div>
+    <div class="content-box-large box-with-header">
+        @using (Html.BeginForm("AlteraSenha", "Seguranca", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.usuarioId)
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.usuario, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-lg-10 col-md-10">
+                        @Html.TextBoxFor(model => model.usuario, new { style = "width:40em;", @class = "form-control", autofocus = "autofocus", @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.senhaantiga, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-lg-10 col-md-10">
+                        @Html.PasswordFor(m => m.senhaantiga, new { @class = "form-control k-textbox", style = "width:40em;" })
+                        @Html.ValidationMessageFor(model => model.senhaantiga, "", new { @class = "text-danger" }, "div")
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.senha, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-lg-10 col-md-10">
+                        @Html.PasswordFor(m => m.senha, new { @class = "form-control k-textbox", style = "width:40em;" })
+                        @Html.ValidationMessageFor(model => model.senha, "", new { @class = "text-danger" }, "div")
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.confirmarsenha, htmlAttributes: new { @class = "control-label col-md-2 col-lg-2" })
+                    <div class="col-lg-10 col-md-10">
+                        @Html.PasswordFor(m => m.confirmarsenha, new { @class = "form-control k-textbox", style = "width:40em;" })
+                        @Html.ValidationMessageFor(model => model.confirmarsenha, "", new { @class = "text-danger" }, "div")
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group" style="padding-top: 20px;">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-default" />&nbsp;&nbsp;<a href="~/" class="btn btn-danger">Cancelar</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+        $(function () {
+            $("form").kendoValidator();
+        });
+</script>
+

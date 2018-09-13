@@ -89,8 +89,9 @@ namespace CMMC.Infraestrutura.Identity
         public Task SetPasswordHashAsync(IdentityUser user, string passwordHash)
         {
             user.PasswordHash = passwordHash;
-            _usuariorepository.Alterar(user.ToUsuario());
-            return _usuariorepository.Salvar();
+            //_usuariorepository.Alterar(user.ToUsuario());
+            //return _usuariorepository.Salvar();
+            return Task.CompletedTask;
         }
 
         public Task<string> GetPasswordHashAsync(IdentityUser user)
@@ -190,24 +191,20 @@ namespace CMMC.Infraestrutura.Identity
         {
             user.TerminoBloqueio = lockoutEnd.DateTime;
             user.Bloqueado = true;
-            _usuariorepository.Alterar(user.ToUsuario());
-            return _usuariorepository.Salvar();
+            return Task.CompletedTask;
         }
 
         public Task<int> IncrementAccessFailedCountAsync(IdentityUser user)
         {
             user.QuantidadeFalhasAcesso++;
-            _usuariorepository.Alterar(user.ToUsuario());
-            _usuariorepository.Salvar();
             return Task.FromResult<int>(user.QuantidadeFalhasAcesso);
         }
 
         public Task ResetAccessFailedCountAsync(IdentityUser user)
         {
             user.QuantidadeFalhasAcesso = 0;
-            _usuariorepository.Alterar(user.ToUsuario());
-            return _usuariorepository.Salvar();
-            
+            return Task.CompletedTask;
+
         }
 
         public Task<int> GetAccessFailedCountAsync(IdentityUser user)

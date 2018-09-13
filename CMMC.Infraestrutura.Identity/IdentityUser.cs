@@ -62,8 +62,8 @@ namespace CMMC.Infraestrutura.Identity
 
         public string UserName
         {
-            get { return this.Nome; }
-            set { this.Nome = value; }
+            get { return this.Login; }
+            set { this.Login = value; }
         }
 
         private List<IdentityRole> _roles;

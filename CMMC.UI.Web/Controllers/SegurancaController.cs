@@ -1,19 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using CMMC.Domain.ViewModels;
 using CMMC.Infraestrutura.Identity;
+using CMMC.UI.Web.Infrastructure.Controllers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 
 namespace CMMC.UI.Web.Controllers
 {
-    public class SegurancaController : Controller
+    public class SegurancaController : BasicController
     {
         private readonly UserManager<IdentityUser, int> _userManager;
         private readonly RoleManager<IdentityRole, int> _roleManager;
@@ -103,6 +101,78 @@ namespace CMMC.UI.Web.Controllers
             // If we got this far, something failed, redisplay form
             //log.Warn("Informações inválidas - usuario: " + model.usuario + " - senha: " + model.senha);
             return View(model);
+        }
+
+        public ActionResult Logoff()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Login");
+        }
+
+        public ActionResult AlteraSenha()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                try
+                {
+                    var usuario = _userManager.FindByName(User.Identity.Name);
+                    //if (usuario == null)
+                    //{
+                    //    return RedirectToAction<UsuarioController>(c => c.Index()).WithError("Erro ao ler dados do Usuário. Favor entrar em contato com o Setor de Informática !!!");
+                    //}
+                    return View(new AlteraSenhaViewModel(usuario.Id, usuario.Login));
+                }
+                catch (Exception e)
+                {
+                    //return RedirectToAction<UsuarioController>(c => c.Index()).WithError("Erro ao ler dados do Usuário. Favor entrar em contato com o Setor de Informática !!!");
+                }
+            }
+
+            return RedirectToAction<HomeController>(c => c.Index()); //.WithError("ID inválido");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AlteraSenha(AlteraSenhaViewModel usr)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        var identityResult = _userManager.ChangePasswordAsync(usr.usuarioId, usr.senhaantiga, usr.senha);
+                        if (identityResult.Result.Succeeded)
+                        {
+                            //log.Info("Usuario alterou sua senha - " + usr.senhaantiga + " - " + usr.senha);
+
+                            if (this.necessarioAlterarSenha)
+                            {
+                                var identity = _userManager.FindById(usr.usuarioId);
+                                identity.NecessarioAlterarSenha = false;
+                                 _userManager.UpdateAsync(identity);
+                                return RedirectToAction("Logoff");
+                            }
+
+                            return RedirectToAction<HomeController>(c => c.Index());//.WithSuccess("Senha alterada com sucesso !!!");
+                        }
+                        else
+                        {
+                            foreach (var error in identityResult.Result.Errors)
+                            {
+                                ModelState.AddModelError("", error);
+                            }
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        ModelState.AddModelError("", e.Message);
+                        return View(usr);
+                    }
+                }
+                return View(usr);
+            }
+            return RedirectToAction<HomeController>(c => c.Index());
         }
     }
 }
