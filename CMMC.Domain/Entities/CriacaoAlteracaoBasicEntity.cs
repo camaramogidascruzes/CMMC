@@ -5,6 +5,13 @@ namespace CMMC.Domain.Entities
 {
     public class CriacaoAlteracaoBasicEntity : BasicEntity
     {
+        protected CriacaoAlteracaoBasicEntity()
+        {
+            DadosCriacaoRegistro = new DadosCriacaoRegistro();
+            DadosAlteracaoRegistro = new DadosAlteracaoRegistro();
+            Excluido = false;
+        }
+
         public CriacaoAlteracaoBasicEntity(string usuario)
         {
             DadosCriacaoRegistro = new DadosCriacaoRegistro(usuario);

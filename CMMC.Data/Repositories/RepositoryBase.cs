@@ -76,7 +76,11 @@ namespace CMMC.Data.Repositories
 
         public TEntity Alterar(TEntity entity)
         {
-            Set.Attach(entity);
+            var entry = _context.Entry(entity);
+            if (entry.State == EntityState.Detached)
+            {
+                Set.Attach(entity);
+            }
             _context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
@@ -97,7 +101,7 @@ namespace CMMC.Data.Repositories
             this.Excluir(entity);
         }
 
-        public Task Salvar()
+        public Task<int> Salvar()
         {
             return _context.SaveChangesAsync();
         }

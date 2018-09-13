@@ -18,6 +18,6 @@ namespace CMMC.Domain.Interfaces.Repositories
         void Excluir(TEntity entity);
         void Excluir(int id);
 
-        Task Salvar();
+        Task<int> Salvar();
     }
 }

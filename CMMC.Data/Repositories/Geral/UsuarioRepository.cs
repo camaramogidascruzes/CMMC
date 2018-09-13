@@ -16,9 +16,16 @@ namespace CMMC.Data.Repositories.Geral
             if (context == null) throw new ArgumentNullException();
         }
 
+
+        public async Task<Usuario> LerUsuarioPorId(int id)
+        {
+            return await Set.AsNoTracking().Include("Grupos").SingleOrDefaultAsync(e => e.Id == id);
+        }
+
         public async Task<Usuario> BuscarPorNome(string username)
         {
-            return await Set.AsNoTracking().SingleOrDefaultAsync(e => e.Login == username);
+            
+            return await Set.AsNoTracking().Include("Grupos.Grupo").SingleOrDefaultAsync(e => e.Login == username);
         }
 
         public Task<List<Grupo>> ListarGrupos(int usuarioId)

@@ -36,7 +36,7 @@ namespace CMMC.Infraestrutura.Identity
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            _usuariorepository.Novo(user);
+            _usuariorepository.Novo(user.ToUsuario());
 
             return _usuariorepository.Salvar();
         }
@@ -46,7 +46,7 @@ namespace CMMC.Infraestrutura.Identity
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            _usuariorepository.Alterar(user);
+            _usuariorepository.Alterar(user.ToUsuario());
 
             return _usuariorepository.Salvar();
         }
@@ -56,14 +56,14 @@ namespace CMMC.Infraestrutura.Identity
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            _usuariorepository.Excluir(user);
+            _usuariorepository.Excluir(user.ToUsuario());
 
             return _usuariorepository.Salvar();
         }
 
         public Task<IdentityUser> FindByIdAsync(int userId)
         {
-            var usuario = _usuariorepository.LerPorId(userId);
+            var usuario = _usuariorepository.LerUsuarioPorId(userId);
             return Task.FromResult<IdentityUser>(IdentityUser.FromUsuario(usuario.Result));
         }
 
@@ -89,7 +89,8 @@ namespace CMMC.Infraestrutura.Identity
         public Task SetPasswordHashAsync(IdentityUser user, string passwordHash)
         {
             user.PasswordHash = passwordHash;
-            return Task.FromResult(0);
+            _usuariorepository.Alterar(user.ToUsuario());
+            return _usuariorepository.Salvar();
         }
 
         public Task<string> GetPasswordHashAsync(IdentityUser user)
@@ -189,18 +190,24 @@ namespace CMMC.Infraestrutura.Identity
         {
             user.TerminoBloqueio = lockoutEnd.DateTime;
             user.Bloqueado = true;
-            return Task.FromResult(0);
+            _usuariorepository.Alterar(user.ToUsuario());
+            return _usuariorepository.Salvar();
         }
 
         public Task<int> IncrementAccessFailedCountAsync(IdentityUser user)
         {
             user.QuantidadeFalhasAcesso++;
+            _usuariorepository.Alterar(user.ToUsuario());
+            _usuariorepository.Salvar();
             return Task.FromResult<int>(user.QuantidadeFalhasAcesso);
         }
 
         public Task ResetAccessFailedCountAsync(IdentityUser user)
         {
-            return Task.Run(() => { user.QuantidadeFalhasAcesso = 0; });
+            user.QuantidadeFalhasAcesso = 0;
+            _usuariorepository.Alterar(user.ToUsuario());
+            return _usuariorepository.Salvar();
+            
         }
 
         public Task<int> GetAccessFailedCountAsync(IdentityUser user)

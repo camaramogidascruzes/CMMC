@@ -4,6 +4,11 @@ namespace CMMC.Domain.Entities
 {
     public class DadosCriacaoRegistro
     {
+        public DadosCriacaoRegistro()
+        {
+            DataCriacao = DateTime.MinValue;
+        }
+
         public DadosCriacaoRegistro(string usuario)
         {
             DataCriacao = DateTime.Now;

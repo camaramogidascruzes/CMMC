@@ -13,6 +13,7 @@ namespace CMMC.UI.Web.Controllers
             return View();
         }
 
+        [Authorize(Roles= "UsuarioPaperCut")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

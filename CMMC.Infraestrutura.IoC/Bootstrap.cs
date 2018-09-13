@@ -19,6 +19,8 @@ namespace CMMC.Infraestrutura.IoC
         {
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
             container.Register<GeralContext>(Lifestyle.Scoped);
+            container.Register<UserManager<IdentityUser, int>>(Lifestyle.Scoped);
+            container.Register<RoleManager<IdentityRole, int>>(Lifestyle.Scoped);
             container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Scoped);
             container.Register<IGrupoRepository, GrupoRepository>(Lifestyle.Scoped);
             container.Register<IUserStore<IdentityUser, int>, UserStore>(Lifestyle.Scoped);

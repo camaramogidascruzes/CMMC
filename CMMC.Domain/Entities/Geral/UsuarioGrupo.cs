@@ -2,6 +2,11 @@
 {
     public class UsuarioGrupo
     {
+        private UsuarioGrupo()
+        {
+            DadosCriacaoRegistro = new DadosCriacaoRegistro();
+        }
+
         public UsuarioGrupo(int usuarioId, int grupoId, string usuario)
         {
             IdUsuario = usuarioId;

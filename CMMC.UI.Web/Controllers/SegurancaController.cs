@@ -72,6 +72,7 @@ namespace CMMC.UI.Web.Controllers
                 var user = await _userManager.FindByNameAsync(model.usuario);
                 if (user != null)
                 {
+
                     AuthenticationManager.SignOut();
                     var signInManager = new SignInManager(_userManager, AuthenticationManager);
                     var status = signInManager.PasswordSignIn<IdentityUser, int>(model.usuario, model.senha, false, true);
@@ -89,6 +90,8 @@ namespace CMMC.UI.Web.Controllers
                             ModelState.AddModelError("", "Usuário ou Senha inválidos !!!");
                             return View(model);
                     }
+
+                    
                 }
                 else
                 {
