@@ -76,13 +76,27 @@ namespace CMMC.Data.Repositories
 
         public TEntity Alterar(TEntity entity)
         {
-            var entry = _context.Entry(entity);
-            if (entry.State == EntityState.Detached)
+            try
             {
-                Set.Attach(entity);
+                var entry = _context.Entry(entity);
+                try
+                {
+                    if (entry.State == EntityState.Detached)
+                    {
+                        _context.Set<TEntity>().Attach(entity);
+                        entry = _context.Entry(entity);
+                    }
+                }
+                finally
+                {
+                    entry.State = EntityState.Modified;
+                }
+                return entity;
             }
-            _context.Entry(entity).State = EntityState.Modified;
-            return entity;
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public void Excluir(TEntity entity)

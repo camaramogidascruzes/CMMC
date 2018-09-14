@@ -47,9 +47,16 @@ namespace CMMC.Data.Repositories.Geral
             return Task.FromResult(new List<Grupo>());
         }
 
+        public void AlteraNecessario(int id)
+        {
+            var usuario = Set.FirstOrDefault(u => u.Id == id);
+            usuario.NecessarioAlterarSenha = (!usuario.NecessarioAlterarSenha);
+            _context.SaveChanges();
+        }
+
         public IQueryable<Usuario> BuscarUsuario()
         {
-            return Set.AsQueryable();
+            return Set.AsNoTracking().AsQueryable();
         }
     }
 }

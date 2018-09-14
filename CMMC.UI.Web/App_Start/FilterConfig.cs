@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using CMMC.UI.Web.Infrastructure.Attributes;
 
 namespace CMMC.UI.Web
 {
@@ -9,6 +10,7 @@ namespace CMMC.UI.Web
         {
             filters.Add(new HandleErrorAttribute());
             filters.Add(new AuthorizeAttribute());
+            filters.Add(new NecessarioAlterarSenhaAttribute("Seguranca", "AlteraSenha"));
         }
     }
 }

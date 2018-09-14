@@ -39,6 +39,7 @@
                         @Html.ValidationMessageFor(model => model.confirmarsenha, "", new { @class = "text-danger" }, "div")
                     </div>
                 </div>
+                @Html.ValidationSummary(true)
                 <hr />
                 <div class="form-group" style="padding-top: 20px;">
                     <div class="col-md-offset-2 col-md-10">

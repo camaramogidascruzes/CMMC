@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Diagnostics;
 using CMMC.Data.EntityConfigurations;
 using CMMC.Data.EntityConfigurations.Geral;
 using CMMC.Data.EntityConfigurations.RedeSemFio;
@@ -21,6 +22,8 @@ namespace CMMC.Data.Context
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
             this.Configuration.ValidateOnSaveEnabled = false;
+
+            this.Database.Log = message => Trace.WriteLine(message);
         }
 
         /* Geral */

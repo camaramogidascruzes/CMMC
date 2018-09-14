@@ -89,8 +89,6 @@ namespace CMMC.Infraestrutura.Identity
         public Task SetPasswordHashAsync(IdentityUser user, string passwordHash)
         {
             user.PasswordHash = passwordHash;
-            //_usuariorepository.Alterar(user.ToUsuario());
-            //return _usuariorepository.Salvar();
             return Task.CompletedTask;
         }
 

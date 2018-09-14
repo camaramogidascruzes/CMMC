@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CMMC.Data.Repositories.Geral;
+using CMMC.Domain.Interfaces.Repositories.Geral;
 using CMMC.Domain.ViewModels;
 using CMMC.Infraestrutura.Identity;
 using CMMC.UI.Web.Infrastructure.Controllers;
@@ -15,11 +17,14 @@ namespace CMMC.UI.Web.Controllers
     {
         private readonly UserManager<IdentityUser, int> _userManager;
         private readonly RoleManager<IdentityRole, int> _roleManager;
+        private readonly IUsuarioRepository _usuariorepository;
 
-        public SegurancaController(UserManager<IdentityUser, int> userManager, RoleManager<IdentityRole, int> roleManager)
+        public SegurancaController(UserManager<IdentityUser, int> userManager, RoleManager<IdentityRole, int> roleManager, IUsuarioRepository usuariorepository)
         {
             _userManager = userManager;
             _roleManager = roleManager;
+            _usuariorepository = usuariorepository;
+
 
             _userManager.UserLockoutEnabledByDefault = true;
             _userManager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
@@ -141,24 +146,31 @@ namespace CMMC.UI.Web.Controllers
                 {
                     try
                     {
-                        var identityResult = _userManager.ChangePasswordAsync(usr.usuarioId, usr.senhaantiga, usr.senha);
-                        if (identityResult.Result.Succeeded)
+                        var identityResult = _userManager.ChangePassword(usr.usuarioId, usr.senhaantiga, usr.senha);
+                        if (identityResult.Succeeded)
                         {
                             //log.Info("Usuario alterou sua senha - " + usr.senhaantiga + " - " + usr.senha);
 
                             if (this.necessarioAlterarSenha)
                             {
-                                var identity = _userManager.FindById(usr.usuarioId);
-                                identity.NecessarioAlterarSenha = false;
-                                 _userManager.UpdateAsync(identity);
-                                return RedirectToAction("Logoff");
+                                _usuariorepository.AlteraNecessario(usr.usuarioId);
+                                //usuario.NecessarioAlterarSenha = false;
+//                                if (_usuariorepository.Alterar(usuario) != null)
+                                //{
+                                    return RedirectToAction("Logoff");
+                                //}
+                                //else
+                                //{
+                                //    ModelState.AddModelError("", "Não foi possível alterar sua senha !!!");
+                                //    return View(usr);
+                                //}
                             }
 
                             return RedirectToAction<HomeController>(c => c.Index());//.WithSuccess("Senha alterada com sucesso !!!");
                         }
                         else
                         {
-                            foreach (var error in identityResult.Result.Errors)
+                            foreach (var error in identityResult.Errors)
                             {
                                 ModelState.AddModelError("", error);
                             }
