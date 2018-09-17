@@ -255,11 +255,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
+    <Compile Include="Areas\Geral\Controllers\FuncionariosController.cs" />
+    <Compile Include="Areas\Geral\GeralAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SegurancaController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ActionResults\StandardJsonResult.cs" />
     <Compile Include="Infrastructure\Attributes\NecessarioAlterarSenhaAttribute.cs" />
     <Compile Include="Infrastructure\Controllers\BasicController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -711,6 +714,7 @@
     <Content Include="Content\kendo\2018.3.911\images\kendoui.ttf" />
     <Content Include="Content\kendo\2018.3.911\images\kendoui.woff" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Content Include="Areas\Geral\Views\web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -2826,9 +2830,14 @@
     <Content Include="Views\Seguranca\Login.cshtml" />
     <Content Include="Views\Seguranca\Lockout.cshtml" />
     <Content Include="Views\Seguranca\AlteraSenha.cshtml" />
+    <Content Include="Views\Seguranca\Usuarios.cshtml" />
+    <Content Include="Views\Seguranca\Grupos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Geral\Models\" />
+    <Folder Include="Areas\Geral\Views\Funcionarios\" />
+    <Folder Include="Areas\Geral\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

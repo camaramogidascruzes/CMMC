@@ -10,6 +10,7 @@ using CMMC.UI.Web.Infrastructure.Controllers;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using CMMC.UI.Web.Infrastructure.ActionResults;
 
 namespace CMMC.UI.Web.Controllers
 {
@@ -153,17 +154,15 @@ namespace CMMC.UI.Web.Controllers
 
                             if (this.necessarioAlterarSenha)
                             {
-                                _usuariorepository.AlteraNecessario(usr.usuarioId);
-                                //usuario.NecessarioAlterarSenha = false;
-//                                if (_usuariorepository.Alterar(usuario) != null)
-                                //{
+                                if (_usuariorepository.AlteraNecessarioAlterarSenha(usr.usuarioId, false).IsCompleted)
+                                {
                                     return RedirectToAction("Logoff");
-                                //}
-                                //else
-                                //{
-                                //    ModelState.AddModelError("", "Não foi possível alterar sua senha !!!");
-                                //    return View(usr);
-                                //}
+                                }
+                                else
+                                {
+                                    ModelState.AddModelError("", "Não foi possível alterar sua senha !!!");
+                                    return View(usr);
+                                }
                             }
 
                             return RedirectToAction<HomeController>(c => c.Index());//.WithSuccess("Senha alterada com sucesso !!!");
@@ -186,5 +185,31 @@ namespace CMMC.UI.Web.Controllers
             }
             return RedirectToAction<HomeController>(c => c.Index());
         }
+
+
+        [Authorize(Roles = "Administrador")]
+        public ActionResult Usuarios()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Administrador")]
+        public ActionResult Grupos()
+        {
+            return View();
+        }
+
+        public StandardJsonResult ListarTodos()
+        {
+            try
+            {
+                return StandardJsonAllowGet(service.LerTodos(idGabinete.Value).Select(g => new { id = g.id, nome = g.nome, descricao = g.descricao }));
+            }
+            catch (Exception e)
+            {
+                return JsonErrorAllowGet(e.Message);
+            }
+        }
+
     }
 }

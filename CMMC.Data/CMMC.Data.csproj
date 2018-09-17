@@ -69,16 +69,37 @@
     <Compile Include="Context\MigrationContext.cs" />
     <Compile Include="EntityConfigurations\DadosAlteracaoRegistroConfiguration.cs" />
     <Compile Include="EntityConfigurations\DadosCriacaoRegistroConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\CargoConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\EmpresaConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\EmpresaContatoConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\EmpresasTiposConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\FuncionarioConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\FuncionarioContatoConfiguration.cs" />
     <Compile Include="EntityConfigurations\Geral\GrupoConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\OcupacaoConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\ParlamentarConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\PatrimonioConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\SetorConfiguration.cs" />
+    <Compile Include="EntityConfigurations\Geral\TipoEmpresaConfiguration.cs" />
     <Compile Include="EntityConfigurations\Geral\UsuarioConfiguration.cs" />
     <Compile Include="EntityConfigurations\Geral\UsuarioGrupoConfiguration.cs" />
     <Compile Include="EntityConfigurations\InformacaoDocumentoConfiguration.cs" />
     <Compile Include="EntityConfigurations\InformacaoEnderecoConfiguration.cs" />
     <Compile Include="EntityConfigurations\InformacaoTelefoneConfiguration.cs" />
     <Compile Include="EntityConfigurations\RedeSemFio\CategoriaUsuarioConfiguration.cs" />
+    <Compile Include="EntityConfigurations\RedeSemFio\CodigoAcessoConfiguration.cs" />
+    <Compile Include="EntityConfigurations\RedeSemFio\UsuarioConfiguration.cs" />
     <Compile Include="Migrations\201809121222388_InitialCreate.cs" />
     <Compile Include="Migrations\201809121222388_InitialCreate.Designer.cs">
       <DependentUpon>201809121222388_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809171833101_1709-Geral-RedeSemFio.cs" />
+    <Compile Include="Migrations\201809171833101_1709-Geral-RedeSemFio.Designer.cs">
+      <DependentUpon>201809171833101_1709-Geral-RedeSemFio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201809171853043_1709-AdicionaFuncionarioAoUsuario.cs" />
+    <Compile Include="Migrations\201809171853043_1709-AdicionaFuncionarioAoUsuario.Designer.cs">
+      <DependentUpon>201809171853043_1709-AdicionaFuncionarioAoUsuario.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +121,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809121222388_InitialCreate.resx">
       <DependentUpon>201809121222388_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171833101_1709-Geral-RedeSemFio.resx">
+      <DependentUpon>201809171833101_1709-Geral-RedeSemFio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809171853043_1709-AdicionaFuncionarioAoUsuario.resx">
+      <DependentUpon>201809171853043_1709-AdicionaFuncionarioAoUsuario.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

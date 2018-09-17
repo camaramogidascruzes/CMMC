@@ -49,13 +49,26 @@
     <Compile Include="Entities\Enums\PermissaoCatalogoTelefonicoEnum.cs" />
     <Compile Include="Entities\Enums\TipoDocumentoEnum.cs" />
     <Compile Include="Entities\Enums\TipoTelefoneEnum.cs" />
+    <Compile Include="Entities\Geral\Cargo.cs" />
+    <Compile Include="Entities\Geral\Empresa.cs" />
+    <Compile Include="Entities\Geral\EmpresaContato.cs" />
+    <Compile Include="Entities\Geral\EmpresasTipos.cs" />
+    <Compile Include="Entities\Geral\Funcionario.cs" />
+    <Compile Include="Entities\Geral\FuncionarioContato.cs" />
     <Compile Include="Entities\Geral\Grupo.cs" />
+    <Compile Include="Entities\Geral\Ocupacao.cs" />
+    <Compile Include="Entities\Geral\Parlamentar.cs" />
+    <Compile Include="Entities\Geral\Patrimonio.cs" />
+    <Compile Include="Entities\Geral\Setor.cs" />
+    <Compile Include="Entities\Geral\TipoEmpresa.cs" />
     <Compile Include="Entities\Geral\Usuario.cs" />
     <Compile Include="Entities\Geral\UsuarioGrupo.cs" />
     <Compile Include="Entities\InformacaoDocumento.cs" />
     <Compile Include="Entities\InformacaoEndereco.cs" />
     <Compile Include="Entities\InformacaoTelefone.cs" />
     <Compile Include="Entities\RedeSemFio\CategoriaUsuario.cs" />
+    <Compile Include="Entities\RedeSemFio\CodigoAcesso.cs" />
+    <Compile Include="Entities\RedeSemFio\UsuarioRedeSemFio.cs" />
     <Compile Include="Interfaces\Repositories\Geral\IGrupoRepository.cs" />
     <Compile Include="Interfaces\Repositories\Geral\IUsuarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
@@ -63,7 +76,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AlteraSenhaViewModel.cs" />
     <Compile Include="ViewModels\BasicViewModel.cs" />
+    <Compile Include="ViewModels\GrupoViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Interfaces\Services\" />

@@ -1,3 +1,4 @@
+using CMMC.Domain.Entities;
 using CMMC.Domain.Entities.Geral;
 
 namespace CMMC.Data.Migrations
@@ -18,6 +19,9 @@ namespace CMMC.Data.Migrations
 
         protected override void Seed(CMMC.Data.Context.MigrationContext context)
         {
+
+            #region Seguranca
+
             var loginUsuariopadrao = "fernando.komura";
             var loginUsuarioAdministrador = "administrador";
             var passwordhash = "AHjLWSHRHMUHbUvQ5O+vm3CXo2Mw5fLnmjc8qB0rzP5Pi5jSkNB6XaWqK4MkQqtD8g==";
@@ -111,6 +115,84 @@ namespace CMMC.Data.Migrations
             }
 
             context.SaveChanges();
+
+            #endregion
+
+            #region Geral
+
+            var dadoscriacao = new DadosCriacaoRegistro() { DataCriacao = DateTime.Now, UsuarioCriacao = loginUsuariopadrao };
+            var dadosalteracao = new DadosAlteracaoRegistro() { DataUltimaAlteracao = DateTime.Now, UsuarioUltimaAlteracao = loginUsuariopadrao };
+
+            /* Setores */
+            var nomesetorTI = "Divisão de T.I";
+            var nomesetorSecAdm = "Secretaria Geral Administrativa";
+            var nomesetorProtocolo = "Protocolo";
+            var nomesetorSecLeg = "Secretaria Geral Legislativa";
+
+            context.Setores.AddOrUpdate(s => s.Nome, new Setor()
+            {
+                Nome = nomesetorTI,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            context.Setores.AddOrUpdate(s => s.Nome, new Setor()
+            {
+                Nome = nomesetorSecAdm,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            context.Setores.AddOrUpdate(s => s.Nome, new Setor()
+            {
+                Nome = nomesetorProtocolo,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            context.Setores.AddOrUpdate(s => s.Nome, new Setor()
+            {
+                Nome = nomesetorSecLeg,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+
+            /* Cargo */
+            var nomecargoChefeDivisão = "Chefe de Divisão";
+            var nomecargoDiretorDepartamento = "Diretor de Departamento";
+            var nomecargoChefeAssLegislativa = "Chefe de Assessoria Legislativa";
+            var nomecargoAssPolLeg = "Assessor para Assuntos Politico-Legilsativos";
+
+            context.Cargos.AddOrUpdate(c => c.Nome, new Cargo()
+            {
+                Nome = nomecargoChefeDivisão,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            context.Cargos.AddOrUpdate(c => c.Nome, new Cargo()
+            {
+                Nome = nomecargoDiretorDepartamento,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            context.Cargos.AddOrUpdate(c => c.Nome, new Cargo()
+            {
+                Nome = nomecargoChefeAssLegislativa,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            context.Cargos.AddOrUpdate(c => c.Nome, new Cargo()
+            {
+                Nome = nomecargoAssPolLeg,
+                DadosCriacaoRegistro = dadoscriacao,
+                DadosAlteracaoRegistro = dadosalteracao
+            });
+
+            #endregion
 
         }
     }

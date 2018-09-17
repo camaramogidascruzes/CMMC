@@ -21,6 +21,7 @@ namespace CMMC.Data.EntityConfigurations.Geral
             this.Property(u => u.NecessarioAlterarSenha).HasColumnName("necessarioalterarsenha").IsOptional();
 
             this.HasMany(u => u.Grupos).WithRequired(u => u.Usuario).HasForeignKey(u => u.IdUsuario);
+            this.HasOptional(u => u.Funcionario).WithMany().HasForeignKey(u => u.IdFuncionario);
         }
     }
 }

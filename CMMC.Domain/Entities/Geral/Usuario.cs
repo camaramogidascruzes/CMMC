@@ -24,6 +24,8 @@ namespace CMMC.Domain.Entities.Geral
         public int QuantidadeFalhasAcesso { get; set; }
         public string Ip { get; set; }
         public bool NecessarioAlterarSenha { get; set; }
+        public int? IdFuncionario { get; set; }
+        public Funcionario Funcionario { get; set; }
 
         public ICollection<UsuarioGrupo> Grupos { get; set; }
 

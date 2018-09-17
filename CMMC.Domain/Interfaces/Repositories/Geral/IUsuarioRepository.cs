@@ -13,7 +13,7 @@ namespace CMMC.Domain.Interfaces.Repositories.Geral
         IQueryable<Usuario> BuscarUsuario();
         Task<List<Grupo>> ListarGrupos(int usuarioId);
 
-        void AlteraNecessario(int id);
+        Task AlteraNecessarioAlterarSenha(int id, bool necessarioalterarsenha);
 
     }
 }
