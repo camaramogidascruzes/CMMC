@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using CMMC.Data.Repositories.Geral;
-using CMMC.Domain.Interfaces.Repositories.Geral;
+using CMMC.Domain.Interfaces.Services.Geral;
 using CMMC.Domain.ViewModels;
 using CMMC.Infraestrutura.Identity;
 using CMMC.UI.Web.Infrastructure.Controllers;
@@ -18,13 +17,13 @@ namespace CMMC.UI.Web.Controllers
     {
         private readonly UserManager<IdentityUser, int> _userManager;
         private readonly RoleManager<IdentityRole, int> _roleManager;
-        private readonly IUsuarioRepository _usuariorepository;
+        private readonly IUsuarioAppService _usuarioappservice;
 
-        public SegurancaController(UserManager<IdentityUser, int> userManager, RoleManager<IdentityRole, int> roleManager, IUsuarioRepository usuariorepository)
+        public SegurancaController(UserManager<IdentityUser, int> userManager, RoleManager<IdentityRole, int> roleManager, IUsuarioAppService usuarioappservice)
         {
             _userManager = userManager;
             _roleManager = roleManager;
-            _usuariorepository = usuariorepository;
+            _usuarioappservice = usuarioappservice;
 
 
             _userManager.UserLockoutEnabledByDefault = true;
@@ -154,7 +153,7 @@ namespace CMMC.UI.Web.Controllers
 
                             if (this.necessarioAlterarSenha)
                             {
-                                if (_usuariorepository.AlteraNecessarioAlterarSenha(usr.usuarioId, false).IsCompleted)
+                                if (_usuarioappservice.AlteraNecessarioAlterarSenha(usr.usuarioId, false).IsCompleted)
                                 {
                                     return RedirectToAction("Logoff");
                                 }
@@ -199,17 +198,17 @@ namespace CMMC.UI.Web.Controllers
             return View();
         }
 
-        public StandardJsonResult ListarTodos()
-        {
-            try
-            {
-                return StandardJsonAllowGet(service.LerTodos(idGabinete.Value).Select(g => new { id = g.id, nome = g.nome, descricao = g.descricao }));
-            }
-            catch (Exception e)
-            {
-                return JsonErrorAllowGet(e.Message);
-            }
-        }
+        //public StandardJsonResult ListarTodosGrupos()
+        //{
+        //    try
+        //    {
+        //        return StandardJsonAllowGet(_usuarioappservice.LerTodos(idGabinete.Value).Select(g => new { id = g.id, nome = g.nome, descricao = g.descricao }));
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return JsonErrorAllowGet(e.Message);
+        //    }
+        //}
 
     }
 }

@@ -69,10 +69,11 @@
     <Compile Include="Entities\RedeSemFio\CategoriaUsuario.cs" />
     <Compile Include="Entities\RedeSemFio\CodigoAcesso.cs" />
     <Compile Include="Entities\RedeSemFio\UsuarioRedeSemFio.cs" />
-    <Compile Include="Interfaces\Repositories\Geral\IGrupoRepository.cs" />
-    <Compile Include="Interfaces\Repositories\Geral\IUsuarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
-    <Compile Include="Interfaces\Repositories\IRepositoryCriacaoAlteracaoBase.cs" />
+    <Compile Include="Interfaces\Services\Geral\IGrupoAppService.cs" />
+    <Compile Include="Interfaces\Services\Geral\IUsuarioAppService.cs" />
+    <Compile Include="Interfaces\Services\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\Services\ICriacaoAlteracaoAppServiceBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AlteraSenhaViewModel.cs" />
     <Compile Include="ViewModels\BasicViewModel.cs" />
@@ -81,7 +82,8 @@
     <Compile Include="ViewModels\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\Services\" />
+    <Folder Include="Interfaces\Repositories\Geral\" />
+    <Folder Include="Interfaces\Services\RedeSemFio\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

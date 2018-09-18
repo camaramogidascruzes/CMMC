@@ -1,12 +1,9 @@
-﻿using CMMC.Data.Repositories.Geral;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CMMC.Domain.Entities.Geral;
-using CMMC.Domain.Interfaces.Repositories.Geral;
+using CMMC.Domain.Interfaces.Services.Geral;
 
 namespace CMMC.Infraestrutura.Identity
 {
@@ -20,13 +17,13 @@ namespace CMMC.Infraestrutura.Identity
         IUserTwoFactorStore<IdentityUser, int>
 
     {
-        private readonly IUsuarioRepository _usuariorepository;
-        private readonly IGrupoRepository _gruporepository;
+        private readonly IUsuarioAppService _usuarioappservice;
+        private readonly IGrupoAppService _grupoappservice;
 
-        public UserStore(IUsuarioRepository usuariorepository, IGrupoRepository gruporepository)
+        public UserStore(IUsuarioAppService usuarioappservice, IGrupoAppService grupoappservice)
         {
-            _usuariorepository = usuariorepository;
-            _gruporepository = gruporepository;
+            _usuarioappservice = usuarioappservice;
+            _grupoappservice = grupoappservice;
         }
 
         #region IUSerStore
@@ -35,20 +32,14 @@ namespace CMMC.Infraestrutura.Identity
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
-
-            _usuariorepository.Novo(user.ToUsuario());
-
-            return _usuariorepository.Salvar();
+            return _usuarioappservice.Novo(user.ToUsuario());
         }
 
         public Task UpdateAsync(IdentityUser user)
         {
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
-
-            _usuariorepository.Alterar(user.ToUsuario());
-
-            return _usuariorepository.Salvar();
+            return _usuarioappservice.Alterar(user.ToUsuario());
         }
 
         public Task DeleteAsync(IdentityUser user)
@@ -56,20 +47,18 @@ namespace CMMC.Infraestrutura.Identity
             if (user == null)
                 throw new ArgumentNullException(nameof(user));
 
-            _usuariorepository.Excluir(user.ToUsuario());
-
-            return _usuariorepository.Salvar();
+            return _usuarioappservice.Excluir(user.ToUsuario());
         }
 
         public Task<IdentityUser> FindByIdAsync(int userId)
         {
-            var usuario = _usuariorepository.LerUsuarioPorId(userId);
+            var usuario = _usuarioappservice.LerUsuarioPorId(userId);
             return Task.FromResult<IdentityUser>(IdentityUser.FromUsuario(usuario.Result));
         }
 
         public Task<IdentityUser> FindByNameAsync(string userName)
         {
-            var usuario = _usuariorepository.BuscarPorNome(userName);
+            var usuario = _usuarioappservice.BuscarPorNome(userName);
             return Task.FromResult<IdentityUser>(IdentityUser.FromUsuario(usuario.Result));
         }
 
@@ -79,7 +68,7 @@ namespace CMMC.Infraestrutura.Identity
 
         public IQueryable<IdentityUser> Users
         {
-            get { return _usuariorepository.BuscarUsuario().Cast<IdentityUser>(); }
+            get { return _usuarioappservice.BuscarUsuario().Cast<IdentityUser>(); }
         }
 
         #endregion 
@@ -125,7 +114,7 @@ namespace CMMC.Infraestrutura.Identity
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            var grupos = _usuariorepository.ListarGrupos(user.Id);
+            var grupos = _usuarioappservice.ListarGrupos(user.Id);
 
             var nomes = new List<string>();
 
@@ -142,7 +131,7 @@ namespace CMMC.Infraestrutura.Identity
             if (user == null)
                 throw new ArgumentNullException("user");
 
-            var grupos = _usuariorepository.ListarGrupos(user.Id);
+            var grupos = _usuarioappservice.ListarGrupos(user.Id);
 
 
             return Task.FromResult<bool>(grupos.Result.Any(g => g.Nome == roleName));
@@ -160,7 +149,7 @@ namespace CMMC.Infraestrutura.Identity
                 if (disposing)
                 {
 
-                    this._usuariorepository.Dispose();
+                    this._usuarioappservice.Dispose();
                 }
 
                 _disposedValue = true;

@@ -6,6 +6,9 @@ namespace CMMC.Domain.ViewModels
 {
     public class UsuarioViewModel
     {
+        private List<GrupoViewModel> _perfis;
+
+
         [Key]
         public int ID { get; set; }
 
@@ -27,9 +30,9 @@ namespace CMMC.Domain.ViewModels
         [Compare("senha", ErrorMessage = "As senhas não conferem.")]
         public string confirmarsenha { get; set; }
 
-        public List<RoleViewModel> perfis
+        public List<GrupoViewModel> perfis
         {
-            get { return _perfis ?? (_perfis = new List<RoleViewModel>()); }
+            get { return _perfis ?? (_perfis = new List<GrupoViewModel>()); }
             set { _perfis = value; }
         }
 

@@ -49,6 +49,31 @@ namespace CMMC.Data.Repositories
             }
         }
 
+        public async Task<TEntity> LerSingleOrDefault(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        {
+            IQueryable<TEntity> query = Set.AsNoTracking();
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            foreach (var includeProperty in includeProperties.Split
+                (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProperty);
+            }
+
+            if (orderBy != null)
+            {
+                return await orderBy(query).AsNoTracking().SingleOrDefaultAsync();
+            }
+            else
+            {
+                return await query.AsNoTracking().SingleOrDefaultAsync();
+            }
+        }
+
         public async Task<List<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
             if (orderBy != null)
@@ -68,6 +93,11 @@ namespace CMMC.Data.Repositories
             return await Set.AsNoTracking().SingleOrDefaultAsync(e => e.Id == id);
         }
 
+        public IQueryable<TEntity> Buscar()
+        {
+            return Set.AsNoTracking().AsQueryable();
+        }
+
         public TEntity Novo(TEntity entity)
         {
             Set.Add(entity);
@@ -76,6 +106,7 @@ namespace CMMC.Data.Repositories
 
         public TEntity Alterar(TEntity entity)
         {
+
             try
             {
                 var entry = _context.Entry(entity);
@@ -93,7 +124,7 @@ namespace CMMC.Data.Repositories
                 }
                 return entity;
             }
-            catch (Exception e)
+            catch(Exception e)
             {
                 return null;
             }
@@ -109,15 +140,9 @@ namespace CMMC.Data.Repositories
             Set.Remove(entity);
         }
 
-        public async void Excluir(int id)
+        public async Task<int> Salvar()
         {
-            var entity = await this.LerPorId(id);
-            this.Excluir(entity);
-        }
-
-        public Task<int> Salvar()
-        {
-            return _context.SaveChangesAsync();
+            return await _context.SaveChangesAsync();
         }
 
         #region IDisposable Support
