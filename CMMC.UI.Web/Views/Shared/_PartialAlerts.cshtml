@@ -1,0 +1,54 @@
+﻿@using CMMC.UI.Web.Infrastructure.Alerts
+
+@(Html.Kendo().Notification()
+    .Name("popupNotification").Stacking(NotificationStackingSettings.Up).AllowHideAfter(3000).Button(false).Position(p => p.Pinned(true).Top(30).Right(30))
+)
+
+@if (TempData.GetAlerts().Any())
+{
+    <script type="text/javascript">
+        $(function () {
+            var popupNotification = $("#popupNotification").data("kendoNotification");
+
+            @foreach (var alert in TempData.GetAlerts())
+			{
+				<text>
+                popupNotification.show('@alert.Message.Replace("'", "\\'")', '@alert.AlertClass' );
+				</text>
+			}
+        });
+    </script>
+}
+@if (ViewData.ModelState[""] != null && ViewData.ModelState[""].Errors.Count > 0)
+{
+    <script type="text/javascript">
+        $(function () {
+            var popupNotification = $("#popupNotification").data("kendoNotification");
+
+            @foreach (var alert in ViewData.ModelState[""].Errors)
+			{
+				<text>
+                popupNotification.show('@alert.ErrorMessage.Replace("'", "\\'")', 'error' );
+				</text>
+			}
+        });
+    </script>
+}
+
+
+<script>
+    function ShowError(e) {
+        if (e.errors) {
+            var message = "Erros:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            var popupNotification = $("#popupNotification").data("kendoNotification");
+            popupNotification.show(message, "error");
+        }
+    }
+</script>

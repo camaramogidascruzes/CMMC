@@ -25,7 +25,7 @@ namespace CMMC.Data.Repositories
             get { return _set ?? (_set = this._context.Set<TEntity>()); }
         }
 
-        public async Task<List<TEntity>> Ler(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public virtual async Task<List<TEntity>> Ler(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = Set.AsNoTracking();
 
@@ -50,7 +50,7 @@ namespace CMMC.Data.Repositories
             }
         }
 
-        public async Task<TEntity> LerSingleOrDefault(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
+        public virtual async Task<TEntity> LerSingleOrDefault(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "")
         {
             IQueryable<TEntity> query = Set.AsNoTracking();
 
@@ -76,7 +76,7 @@ namespace CMMC.Data.Repositories
         }
 
         // Não pode ser assíncrono
-        public async Task<PageableReturn<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        public virtual async Task<PageableReturn<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
             IQueryable<TEntity> query = Set.AsNoTracking();
             if (orderBy != null)
@@ -90,12 +90,12 @@ namespace CMMC.Data.Repositories
             return p;
         }
 
-        public async Task<TEntity> LerPorId(int id)
+        public virtual async Task<TEntity> LerPorId(int id)
         {
             return await Set.AsNoTracking().SingleOrDefaultAsync(e => e.Id == id);
         }
 
-        public IQueryable<TEntity> Buscar()
+        public virtual IQueryable<TEntity> Buscar()
         {
             return Set.AsNoTracking().AsQueryable();
         }

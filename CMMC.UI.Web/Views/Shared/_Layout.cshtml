@@ -48,5 +48,9 @@
     
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+@Html.Partial("_PartialAlerts")
+<script>
+    kendo.culture("pt-BR");
+</script>  
 </body>
 </html>

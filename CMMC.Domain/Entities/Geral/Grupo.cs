@@ -7,7 +7,7 @@ namespace CMMC.Domain.Entities.Geral
 {
     public class Grupo : CriacaoAlteracaoBasicEntity
     {
-        private Grupo()
+        public Grupo()
         {
             Usuarios = new List<UsuarioGrupo>();
         }

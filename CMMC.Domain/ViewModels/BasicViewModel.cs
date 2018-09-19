@@ -1,7 +1,9 @@
-﻿namespace CMMC.Domain.ViewModels
+﻿using CMMC.Domain.Interfaces.ViewModels;
+
+namespace CMMC.Domain.ViewModels
 {
-    public class BasicViewModel
+    public class BasicViewModel : IBasicViewModel
     {
-        public int Id { get; set; }
+        
     }
 }

@@ -1,0 +1,39 @@
+﻿@using CMMC.Domain.ViewModels
+
+@{
+    ViewBag.Title = "Grupos";
+}
+
+<h2>Grupos</h2>
+
+@(Html.Kendo().Grid<GrupoViewModel>()
+      .Name("grupoGrid")
+      .Columns(columns =>
+      {
+          columns.Bound(p => p.nome);
+          columns.Command(command => { command.Edit(); command.Destroy(); }).Width("35%");
+      })    
+      .ToolBar(toolbar => toolbar.Create())
+      .Editable(editable => editable.Mode(GridEditMode.InLine))
+      .Pageable()
+      .Sortable()
+      .DataSource(dataSource => dataSource
+          .Ajax()
+          .PageSize(5)
+          .Events(events => events.Error("error_handler"))
+          .Model(model => model.Id(p => p.Id))
+          .Read(read => read.Action("Listar", "Grupos"))
+          .Create(create => create.Action("Criar", "Grupos"))
+          .Update(update => update.Action("Alterar", "Grupos"))
+          .Destroy(destroy => destroy.Action("Excluir", "Grupos"))
+      )
+)
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            ShowError(e);
+            var grid = $("#grupoGrid").data("kendoGrid");
+            grid.cancelChanges();
+        }
+    }
+</script>
