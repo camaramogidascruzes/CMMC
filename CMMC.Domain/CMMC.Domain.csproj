@@ -69,6 +69,7 @@
     <Compile Include="Entities\RedeSemFio\CategoriaUsuario.cs" />
     <Compile Include="Entities\RedeSemFio\CodigoAcesso.cs" />
     <Compile Include="Entities\RedeSemFio\UsuarioRedeSemFio.cs" />
+    <Compile Include="Infraestructure\PageableReturn.cs" />
     <Compile Include="Interfaces\Repositories\IRepositoryBase.cs" />
     <Compile Include="Interfaces\Services\Geral\IGrupoAppService.cs" />
     <Compile Include="Interfaces\Services\Geral\IUsuarioAppService.cs" />

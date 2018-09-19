@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -10,6 +11,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using CMMC.UI.Web.Infrastructure.ActionResults;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 
 namespace CMMC.UI.Web.Controllers
 {
@@ -18,12 +21,14 @@ namespace CMMC.UI.Web.Controllers
         private readonly UserManager<IdentityUser, int> _userManager;
         private readonly RoleManager<IdentityRole, int> _roleManager;
         private readonly IUsuarioAppService _usuarioappservice;
+        private readonly IGrupoAppService _grupoappservice;
 
-        public SegurancaController(UserManager<IdentityUser, int> userManager, RoleManager<IdentityRole, int> roleManager, IUsuarioAppService usuarioappservice)
+        public SegurancaController(UserManager<IdentityUser, int> userManager, RoleManager<IdentityRole, int> roleManager, IUsuarioAppService usuarioappservice, IGrupoAppService grupoappservice)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _usuarioappservice = usuarioappservice;
+            _grupoappservice = grupoappservice;
 
 
             _userManager.UserLockoutEnabledByDefault = true;
@@ -184,31 +189,5 @@ namespace CMMC.UI.Web.Controllers
             }
             return RedirectToAction<HomeController>(c => c.Index());
         }
-
-
-        [Authorize(Roles = "Administrador")]
-        public ActionResult Usuarios()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Administrador")]
-        public ActionResult Grupos()
-        {
-            return View();
-        }
-
-        //public StandardJsonResult ListarTodosGrupos()
-        //{
-        //    try
-        //    {
-        //        return StandardJsonAllowGet(_usuarioappservice.LerTodos(idGabinete.Value).Select(g => new { id = g.id, nome = g.nome, descricao = g.descricao }));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return JsonErrorAllowGet(e.Message);
-        //    }
-        //}
-
     }
 }

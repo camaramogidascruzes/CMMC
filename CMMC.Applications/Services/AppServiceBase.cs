@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CMMC.Domain.Entities;
+using CMMC.Domain.Infraestructure;
 using CMMC.Domain.Interfaces.Repositories;
 using CMMC.Domain.Interfaces.Services;
 
@@ -23,7 +24,7 @@ namespace CMMC.Applications.Services
             return _repository.Ler(filter, orderBy, includeProperties);
         }
 
-        public Task<List<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        public Task<PageableReturn<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy)
         {
             return _repository.LerTodosPagina(numeroPagina, itensPorPagina, orderBy);
         }

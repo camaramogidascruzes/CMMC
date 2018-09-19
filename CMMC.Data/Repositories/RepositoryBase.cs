@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using CMMC.Domain.Entities;
+using CMMC.Domain.Infraestructure;
 using CMMC.Domain.Interfaces.Repositories;
 
 namespace CMMC.Data.Repositories
@@ -74,18 +75,19 @@ namespace CMMC.Data.Repositories
             }
         }
 
-        public async Task<List<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
+        // Não pode ser assíncrono
+        public async Task<PageableReturn<TEntity>> LerTodosPagina(int numeroPagina, int itensPorPagina, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null)
         {
+            IQueryable<TEntity> query = Set.AsNoTracking();
             if (orderBy != null)
             {
-                return await orderBy(Set.Skip((numeroPagina - 1) * itensPorPagina).Take(itensPorPagina)).AsNoTracking().ToListAsync<TEntity>();
-
+                query = orderBy(query);
             }
-            else
-            {
-                return await Set.Skip((numeroPagina - 1) * itensPorPagina).Take(itensPorPagina).AsNoTracking().ToListAsync<TEntity>();
-            }
+            var p = new PageableReturn<TEntity>();
+            p.Total = query.Count();
+            p.Itens = await query.Skip((numeroPagina - 1) * itensPorPagina).Take(itensPorPagina).ToListAsync<TEntity>();
 
+            return p;
         }
 
         public async Task<TEntity> LerPorId(int id)
@@ -106,7 +108,11 @@ namespace CMMC.Data.Repositories
 
         public TEntity Alterar(TEntity entity)
         {
-
+            var ctEntry = _context.ChangeTracker.Entries<BasicEntity>().FirstOrDefault(e => e.Entity.Id == entity.Id);
+            if (ctEntry != null)
+            {
+                ctEntry.State = EntityState.Detached;
+            }
             try
             {
                 var entry = _context.Entry(entity);

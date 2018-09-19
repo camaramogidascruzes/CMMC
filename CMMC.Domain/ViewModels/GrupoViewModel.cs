@@ -5,6 +5,19 @@ namespace CMMC.Domain.ViewModels
 {
     public class GrupoViewModel
     {
+        public GrupoViewModel()
+        {
+            
+        }
+
+        public GrupoViewModel(int id, string nome)
+        {
+            this.ID = id;
+            this.nome = nome;
+
+        }
+
+
         [Key]
         public int ID { get; set; }
 
